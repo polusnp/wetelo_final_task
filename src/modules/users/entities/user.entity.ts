@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Ad } from 'src/modules/ads/entities/ads.entity';
 
 @Entity()
 export class User {
@@ -6,20 +7,17 @@ export class User {
   public id: number;
 
   @Column()
-  public first_name: string;
-
-  @Column()
-  public last_name: string;
-
-  @Column()
-  public age: number;
-
-  @Column()
-  public driving_license: boolean;
+  public name: string;
 
   @Column()
   public email: string;
 
   @Column()
+  public phone: string;
+
+  @Column()
   public password: string;
+
+  @OneToMany(() => Ad, (ad) => ad.user)
+  public ads: Ad[];
 }

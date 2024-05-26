@@ -4,22 +4,17 @@ import {
   IsNotEmpty,
   MinLength,
   MaxLength,
-  IsNumber,
-  IsBoolean,
+  IsPhoneNumber,
+  IsStrongPassword,
 } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  first_name: string;
+  name: string;
 
-  @IsString()
-  last_name: string;
-
-  @IsNumber()
-  age: number;
-
-  @IsBoolean()
-  driving_license: boolean;
+  @IsPhoneNumber()
+  @IsNotEmpty()
+  phone: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -28,5 +23,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(6)
   @MaxLength(14)
+  @IsStrongPassword()
   password: string;
 }
