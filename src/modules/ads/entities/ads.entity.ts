@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { User } from 'src/modules/users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Ad {
@@ -12,7 +12,7 @@ export class Ad {
   @Column()
   public description: string;
 
-  @Column('double')
+  @Column('double precision')
   public price: number;
 
   @ManyToOne(() => User, (user) => user.ads)

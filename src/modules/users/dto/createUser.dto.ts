@@ -6,6 +6,7 @@ import {
   MaxLength,
   IsPhoneNumber,
   IsStrongPassword,
+  Matches,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -14,6 +15,7 @@ export class CreateUserDto {
 
   @IsPhoneNumber()
   @IsNotEmpty()
+  @Matches(/^(\+38)?0\d{9}$/)
   phone: string;
 
   @IsNotEmpty()

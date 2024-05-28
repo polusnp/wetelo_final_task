@@ -8,7 +8,6 @@ import {
   Put,
   ParseIntPipe,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 
 import { CreateUserDto } from '../dto/createUser.dto';
@@ -18,6 +17,7 @@ import { User } from '../entities/user.entity';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt.guard';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

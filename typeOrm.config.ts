@@ -2,6 +2,8 @@ import * as dotenv from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { User } from './src/modules/users/entities/user.entity';
+import { Ad } from './src/modules/ads/entities/ads.entity';
+import { CreateUsersAdsTables1716925486790 } from './src/migrations/1716925486790-create_users_ads_tables';
 
 dotenv.config();
 
@@ -14,8 +16,8 @@ const options: DataSourceOptions = {
   username: configService.get('POSTGRES_USER'),
   database: configService.get('POSTGRES_DB'),
   password: configService.get('POSTGRES_PASSWORD'),
-  entities: [User],
-  migrations: [],
+  entities: [User, Ad],
+  migrations: [CreateUsersAdsTables1716925486790],
   logging: true,
 };
 
