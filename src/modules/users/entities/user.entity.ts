@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Ad } from '../../ads/entities/ads.entity';
+import { UserRole } from '../../../common/enums/usersRole.enum';
 
 @Entity()
 export class User {
@@ -17,6 +18,14 @@ export class User {
 
   @Column()
   public password: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+    nullable: false,
+  })
+  public role: UserRole;
 
   @OneToMany(() => Ad, (ad) => ad.user)
   public ads: Ad[];

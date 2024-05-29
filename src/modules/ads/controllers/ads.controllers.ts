@@ -15,9 +15,12 @@ import { AdsService } from '../services/ads.servise';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt.guard';
 import { CreateAdDto } from '../dto/createAd.dto';
 import { UpdateAdDto } from '../dto/updateAd.dto';
+import { RolesGuard } from 'src/modules/auth/guards/roles.guard';
+import { Roles } from 'src/modules/auth/decorators/roles.decorator';
+import { UserRole } from 'src/common/enums/usersRole.enum';
 
 @Controller('ads')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class AdsController {
   constructor(private readonly adsService: AdsService) {}
 
@@ -37,6 +40,7 @@ export class AdsController {
   }
 
   @Post()
+  @Roles(UserRole.USER)
   async create(
     @Body() createAdDto: CreateAdDto,
     @Request() req: any,
@@ -44,7 +48,8 @@ export class AdsController {
     return this.adsService.create(createAdDto, req.user.id);
   }
 
-  @Put()
+  @Put(':id')
+  @Roles(UserRole.USER)
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateAdDto: UpdateAdDto,
@@ -53,6 +58,7 @@ export class AdsController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN, UserRole.USER)
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.adsService.remove(id);
   }
