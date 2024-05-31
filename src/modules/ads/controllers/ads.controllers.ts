@@ -9,6 +9,7 @@ import {
   Post,
   Put,
   Delete,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Ad } from '../entities/ads.entity';
 import { AdsService } from '../services/ads.servise';
@@ -45,6 +46,9 @@ export class AdsController {
     @Body() createAdDto: CreateAdDto,
     @Request() req: any,
   ): Promise<Ad> {
+    if (!req.user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     return this.adsService.create(createAdDto, req.user.id);
   }
 
@@ -53,13 +57,23 @@ export class AdsController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateAdDto: UpdateAdDto,
+    @Request() req: any,
   ): Promise<Ad> {
+    if (!req.user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     return this.adsService.update(id, updateAdDto);
   }
 
   @Delete(':id')
   @Roles(UserRole.ADMIN, UserRole.USER)
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  async remove(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req: any,
+  ): Promise<void> {
+    if (!req.user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     return this.adsService.remove(id);
   }
 }

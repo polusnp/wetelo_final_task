@@ -10,6 +10,7 @@ import {
   UseGuards,
   UnauthorizedException,
   Request,
+  Patch,
 } from '@nestjs/common';
 
 import { CreateUserDto } from '../dto/createUser.dto';
@@ -64,5 +65,24 @@ export class UsersController {
   @Roles(UserRole.ADMIN)
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.usersService.remove(id);
+  }
+
+  @Patch('verify/:id')
+  @Roles(UserRole.ADMIN)
+  async verify(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req: any,
+  ): Promise<User> {
+    return this.usersService.verifyUser(id, req.user.id);
+  }
+
+  @Patch('role/:id')
+  @Roles(UserRole.ADMIN)
+  async changeRole(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('role') role: UserRole,
+    @Request() req: any,
+  ): Promise<User> {
+    return this.usersService.changeUserRole(id, role, req.user.id);
   }
 }

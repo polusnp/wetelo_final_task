@@ -27,6 +27,9 @@ export class User {
   })
   public role: UserRole;
 
+  @Column({ default: false })
+  public isVerified: boolean;
+
   @OneToMany(() => Ad, (ad) => ad.user)
   public ads: Ad[];
 }

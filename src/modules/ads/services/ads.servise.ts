@@ -1,7 +1,11 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Ad } from '../entities/ads.entity';
 import { Repository } from 'typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { User } from 'src/modules/users/entities/user.entity';
 import { CreateAdDto } from '../dto/createAd.dto';
 import { UpdateAdDto } from '../dto/updateAd.dto';
@@ -38,16 +42,33 @@ export class AdsService {
 
   async create(createAdDto: CreateAdDto, userId: number): Promise<Ad> {
     const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     const ad = this.adRepository.create({ ...createAdDto, user });
     return this.adRepository.save(ad);
   }
 
   async update(id: number, updateAdDto: UpdateAdDto): Promise<Ad> {
+    const ad = await this.adRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!ad.user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     await this.adRepository.update(id, updateAdDto);
     return this.findById(id);
   }
 
   async remove(id: number): Promise<void> {
+    const ad = await this.adRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!ad.user.isVerified) {
+      throw new UnauthorizedException('User is not verified by an admin');
+    }
     await this.adRepository.delete(id);
   }
 }
