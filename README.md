@@ -82,9 +82,9 @@ This project is a NestJS application with modules for user management, authentic
 
 # Endpoints
 
-**Auth**
-**POST** /auth/register - Register a new user
-**POST** /auth/login - Login a user
+**Auth**:
+**POST**: /auth/register - Register a new user
+**POST**: /auth/login - Login a user
 
 **Users**
 
