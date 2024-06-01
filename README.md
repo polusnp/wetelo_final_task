@@ -82,26 +82,38 @@ This project is a NestJS application with modules for user management, authentic
 
 # Endpoints
 
-**Auth**:
-**POST**: /auth/register - Register a new user
-**POST**: /auth/login - Login a user
+**Auth**
+
+**POST** /auth/register - Register a new user
+
+**POST** /auth/login - Login a user
 
 **Users**
 
 **GET** /users - Get all users (Admin only)
+
 **GET** /users/:id - Get user by ID (Admin and User)
+
 **POST** /users - Create a new user (Admin only)
+
 **PUT** /users/:id - Update a user by ID (Admin only)
+
 **DELETE** /users/:id - Delete a user by ID (Admin only)
+
 **PATCH** /users/verify/:id - Verify a user by ID (Admin only)
+
 **PATCH** /users/role/:id - Change user role by ID (Admin only)
 
 **Ads**
 
 **GET** /ads - Get all ads
+
 **GET** /ads/:id - Get ad by ID
+
 **POST** /ads - Create a new ad (Verified users only)
+
 **PUT** /ads/:id - Update an ad by ID (Verified users only)
+
 **DELETE** /ads/:id - Delete an ad by ID (Verified users only)
 
 # Contributing
