@@ -8,7 +8,6 @@ This project is a NestJS application with modules for user management, authentic
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Running the app](#running-the-app)
-- [Project Structure](#project-structure)
 - [Endpoints](#endpoints)
 - [Contributing](#contributing)
 - [License](#license)
@@ -27,7 +26,6 @@ This project is a NestJS application with modules for user management, authentic
 - **TypeScript**: A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 - **TypeORM**: An ORM that can run in NodeJS, Browser, Cordova, PhoneGap, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES5, ES6, ES7, ES8).
 - **PostgreSQL**: A powerful, open-source object-relational database system.
-- **Docker**: A set of platforms as a service products that use OS-level virtualization to deliver software in packages called containers.
 - **JWT (JSON Web Token)**: A compact, URL-safe means of representing claims to be transferred between two parties.
 - **Passport**: A popular Node.js middleware for handling authentication.
 - **class-validator**: A library for validating objects in JavaScript and TypeScript.
@@ -82,78 +80,29 @@ This project is a NestJS application with modules for user management, authentic
    npm run start:dev
    ```
 
-# Project Structure
-
-src/
-├── common/
-│ └── enums/
-│ └── usersRole.enum.ts
-├── modules/
-│ ├── ads/
-│ │ ├── controllers/
-│ │ │ └── ads.controllers.ts
-│ │ ├── dto/
-│ │ │ ├── createAd.dto.ts
-│ │ │ └── updateAd.dto.ts
-│ │ ├── entities/
-│ │ │ └── ads.entity.ts
-│ │ ├── services/
-│ │ │ └── ads.servise.ts
-│ │ └── ads.module.ts
-│ ├── auth/
-│ │ ├── controllers/
-│ │ │ └── auth.controllers.ts
-│ │ ├── dto/
-│ │ │ ├── loginUser.dto.ts
-│ │ │ └── createUser.dto.ts
-│ │ ├── guards/
-│ │ │ └── jwt.guard.ts
-│ │ ├── services/
-│ │ │ └── auth.services.ts
-│ │ ├── strategies/
-│ │ │ └── jwt.strategy.ts
-│ │ └── auth.module.ts
-│ ├── mail/
-│ │ └── mail.module.ts
-│ ├── users/
-│ │ ├── controllers/
-│ │ │ └── users.controllers.ts
-│ │ ├── dto/
-│ │ │ ├── createUser.dto.ts
-│ │ │ └── updateUser.dto.ts
-│ │ ├── entities/
-│ │ │ └── user.entity.ts
-│ │ ├── services/
-│ │ │ └── users.service.ts
-│ │ └── users.module.ts
-│ └── database/
-│ └── database.module.ts
-├── app.module.ts
-└── main.ts
-
 # Endpoints
 
-Auth
-POST /auth/register - Register a new user
-POST /auth/login - Login a user
+**Auth**
+**POST** /auth/register - Register a new user
+**POST** /auth/login - Login a user
 
-Users
+**Users**
 
-GET /users - Get all users (Admin only)
-GET /users/:id - Get user by ID (Admin and User)
-POST /users - Create a new user (Admin only)
-PUT /users/:id - Update a user by ID (Admin only)
-DELETE /users/:id - Delete a user by ID (Admin only)
-PATCH /users/verify/:id - Verify a user by ID (Admin only)
-PATCH /users/role/:id - Change user role by ID (Admin only)
+**GET** /users - Get all users (Admin only)
+**GET** /users/:id - Get user by ID (Admin and User)
+**POST** /users - Create a new user (Admin only)
+**PUT** /users/:id - Update a user by ID (Admin only)
+**DELETE** /users/:id - Delete a user by ID (Admin only)
+**PATCH** /users/verify/:id - Verify a user by ID (Admin only)
+**PATCH** /users/role/:id - Change user role by ID (Admin only)
 
-Ads
+**Ads**
 
-GET /ads - Get all ads
-GET /ads/:id - Get ad by ID
-POST /ads - Create a new ad (Verified users only)
-PUT /ads/:id - Update an ad by ID (Verified users only)
-DELETE /ads/:id - Delete an ad by ID (Verified users only)
+**GET** /ads - Get all ads
+**GET** /ads/:id - Get ad by ID
+**POST** /ads - Create a new ad (Verified users only)
+**PUT** /ads/:id - Update an ad by ID (Verified users only)
+**DELETE** /ads/:id - Delete an ad by ID (Verified users only)
 
 # Contributing
 
