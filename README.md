@@ -1,73 +1,168 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is a NestJS application with modules for user management, authentication, advertisements, and mail services. It leverages TypeORM for database interactions and JWT for authentication.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Running the app](#running-the-app)
+- [Project Structure](#project-structure)
+- [Endpoints](#endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
+
+- **User Management**: Create, update, delete, and retrieve user information.
+- **Authentication**: Register and login users using JWT-based authentication.
+- **Advertisements**: Manage advertisements with CRUD operations.
+- **Mail Service**: Integrate with a mail service for email notifications.
+- **Role-based Access Control**: Use guards to enforce user roles and permissions.
+
+## Technologies Used
+
+- **NestJS**: A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+- **TypeScript**: A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- **TypeORM**: An ORM that can run in NodeJS, Browser, Cordova, PhoneGap, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES5, ES6, ES7, ES8).
+- **PostgreSQL**: A powerful, open-source object-relational database system.
+- **Docker**: A set of platforms as a service products that use OS-level virtualization to deliver software in packages called containers.
+- **JWT (JSON Web Token)**: A compact, URL-safe means of representing claims to be transferred between two parties.
+- **Passport**: A popular Node.js middleware for handling authentication.
+- **class-validator**: A library for validating objects in JavaScript and TypeScript.
+- **class-transformer**: A library that can be used to transform plain JavaScript objects into instances of classes and vice versa.
 
 ## Installation
 
-```bash
-$ npm install
-```
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd your-repository
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file in the root directory and add your environment variables:
+
+   ```bash
+   DB POSTGRESQL config
+
+   POSTGRES_PORT=POSTGRES_PORT
+   POSTGRES_USER=POSTGRES_USER
+   POSTGRES_DB=POSTGRES_DB
+   POSTGRES_HOST=POSTGRES_HOST
+   POSTGRES_PASSWORD=POSTGRES_PASSWORD
+
+   JWT config
+
+   JWT_SECRET=JWT_SECRET
+   JWT_EXPIRATION_TIME=JWT_EXPIRATION_TIME
+
+   NODEMAILER config
+
+   EMAIL=EMAIL
+   EMAIL_PASSWORD=EMAIL_PASSWORD
+   ```
 
 ## Running the app
 
-```bash
-# development
-$ npm run start
+1. Start the development server:
+   ```bash
+   npm run start:dev
+   ```
 
-# watch mode
-$ npm run start:dev
+# Project Structure
 
-# production mode
-$ npm run start:prod
-```
+src/
+├── common/
+│ └── enums/
+│ └── usersRole.enum.ts
+├── modules/
+│ ├── ads/
+│ │ ├── controllers/
+│ │ │ └── ads.controllers.ts
+│ │ ├── dto/
+│ │ │ ├── createAd.dto.ts
+│ │ │ └── updateAd.dto.ts
+│ │ ├── entities/
+│ │ │ └── ads.entity.ts
+│ │ ├── services/
+│ │ │ └── ads.servise.ts
+│ │ └── ads.module.ts
+│ ├── auth/
+│ │ ├── controllers/
+│ │ │ └── auth.controllers.ts
+│ │ ├── dto/
+│ │ │ ├── loginUser.dto.ts
+│ │ │ └── createUser.dto.ts
+│ │ ├── guards/
+│ │ │ └── jwt.guard.ts
+│ │ ├── services/
+│ │ │ └── auth.services.ts
+│ │ ├── strategies/
+│ │ │ └── jwt.strategy.ts
+│ │ └── auth.module.ts
+│ ├── mail/
+│ │ └── mail.module.ts
+│ ├── users/
+│ │ ├── controllers/
+│ │ │ └── users.controllers.ts
+│ │ ├── dto/
+│ │ │ ├── createUser.dto.ts
+│ │ │ └── updateUser.dto.ts
+│ │ ├── entities/
+│ │ │ └── user.entity.ts
+│ │ ├── services/
+│ │ │ └── users.service.ts
+│ │ └── users.module.ts
+│ └── database/
+│ └── database.module.ts
+├── app.module.ts
+└── main.ts
 
-## Test
+# Endpoints
 
-```bash
-# unit tests
-$ npm run test
+Auth
+POST /auth/register - Register a new user
+POST /auth/login - Login a user
 
-# e2e tests
-$ npm run test:e2e
+Users
 
-# test coverage
-$ npm run test:cov
-```
+GET /users - Get all users (Admin only)
+GET /users/:id - Get user by ID (Admin and User)
+POST /users - Create a new user (Admin only)
+PUT /users/:id - Update a user by ID (Admin only)
+DELETE /users/:id - Delete a user by ID (Admin only)
+PATCH /users/verify/:id - Verify a user by ID (Admin only)
+PATCH /users/role/:id - Change user role by ID (Admin only)
 
-## Support
+Ads
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+GET /ads - Get all ads
+GET /ads/:id - Get ad by ID
+POST /ads - Create a new ad (Verified users only)
+PUT /ads/:id - Update an ad by ID (Verified users only)
+DELETE /ads/:id - Delete an ad by ID (Verified users only)
 
-## Stay in touch
+# Contributing
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Fork the repository.
+Create a new branch: git checkout -b my-new-feature.
+Make your changes and commit them: git commit -m 'Add some feature'.
+Push to the branch: git push origin my-new-feature.
+Submit a pull request.
 
-## License
+# License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License.

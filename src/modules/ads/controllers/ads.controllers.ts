@@ -35,13 +35,8 @@ export class AdsController {
     return this.adsService.findById(id);
   }
 
-  @Get('username/:username')
-  async findByUserName(@Param('userName') userName: string): Promise<Ad[]> {
-    return this.adsService.findByUserName(userName);
-  }
-
   @Post()
-  @Roles(UserRole.USER)
+  @Roles(UserRole.USER, UserRole.ADMIN)
   async create(
     @Body() createAdDto: CreateAdDto,
     @Request() req: any,

@@ -27,7 +27,12 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     const usersCount = await this.userRepository.count();
     const role = usersCount === 0 ? UserRole.ADMIN : UserRole.USER;
-    const newUser = this.userRepository.create({ ...createUserDto, role });
+    const isVerified = usersCount === 0 ? true : false;
+    const newUser = this.userRepository.create({
+      ...createUserDto,
+      role,
+      isVerified,
+    });
     const savedUser = await this.userRepository.save(newUser);
 
     const admins = await this.userRepository.find({
